@@ -1,0 +1,18 @@
+.canvasWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.canvas:hover {
+  box-shadow: none;
+}
