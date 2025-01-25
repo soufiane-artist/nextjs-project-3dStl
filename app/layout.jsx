@@ -1,5 +1,6 @@
 import './styles/globals.css'
 import './styles/variables.css'
+import Script from 'next/script'
 
 export const metadata = {
   title: '3D STL Files Marketplace',
@@ -57,6 +58,19 @@ export default function RootLayout({ children }) {
             <p>&copy; {new Date().getFullYear()} 3D STL Market. All rights reserved.</p>
           </div>
         </footer>
+        <Script id="tawk-script">
+          {`
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+              s1.async=true;
+              s1.src='https://embed.tawk.to/6795146b825083258e0b0c1b/1iif5fgsu';
+              s1.charset='UTF-8';
+              s1.setAttribute('crossorigin','*');
+              s0.parentNode.insertBefore(s1,s0);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   )
