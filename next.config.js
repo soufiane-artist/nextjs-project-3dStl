@@ -2,6 +2,10 @@
 const nextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   
+  // تكوين الإخراج لـ Vercel
+  output: 'standalone',
+  distDir: '.next',
+  
   // تكوين webpack مع تعطيل التتبع
   webpack: (config, { isServer }) => {
     // إضافة canvas كـ external
@@ -21,9 +25,16 @@ const nextConfig = {
     return config;
   },
 
-  // تعطيل التتبع والتحسينات
-  productionBrowserSourceMaps: false,
+  // تكوين إضافي لـ Vercel
+  generateBuildId: () => 'build',
+  poweredByHeader: false,
   generateEtags: false,
+  
+  // تكوين الصور
+  images: {
+    domains: ['localhost'],
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
