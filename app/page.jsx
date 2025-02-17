@@ -1,7 +1,6 @@
 'use client';
 import styles from './styles/Home.module.css';
 import { models } from './data/models';
-import Three from './components/Three';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
