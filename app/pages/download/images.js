@@ -1,4 +1,4 @@
-export const models = [
+export const images = [
     {
         id: 1,
         title: 'Fantasy Dragon',
@@ -9,7 +9,7 @@ export const models = [
         id: 2,
         title: 'Steampunk Clock',
         price: '4.99',
-        image: 'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBcohiyIyGC_kTX5UgXWrYUtMDXy9l2kl03OCfQjmh-dxivx9592y1f1PtTrpkANxPINM&usqp=CAU',
       },
       {
         id: 3,

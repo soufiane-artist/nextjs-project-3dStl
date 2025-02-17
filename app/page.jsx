@@ -1,8 +1,16 @@
+'use client';
 import styles from './styles/Home.module.css';
 import { models } from './data/models';
 import Three from './components/Three';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleDownload = () => {
+    router.push('/pages/download');
+  };
+
   return (
     <div className={styles.container}>
       <section className={styles.hero}>
@@ -45,8 +53,6 @@ export default function Home() {
           <span>•</span>
         </div>
       </div>
-
-    <Three/>
 
       <section className={styles.features}>
         <h2>Join Telegram To Get Unlimited Files</h2>
@@ -107,8 +113,8 @@ export default function Home() {
                   <p className={styles.cardPrice}>${model.price}</p>
                   <span className={styles.cardDownloads}>Free on Telegram</span>
                 </div>
-                <button className={styles.downloadButton}>
-                  Join Telegram
+                <button  className={styles.downloadButton} onClick={handleDownload}>
+                  Pay now
                 </button>
               </div>
             </div>

@@ -1,0 +1,146 @@
+.container {
+    background: var(--background-dark);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.checkoutContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(255, 123, 0, 0.1);
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 2rem;
+    background: linear-gradient(45deg, #ff7b00, #ff9e44);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.orderSummary {
+    background: #f8f8f8;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.orderSummary h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.productInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.productImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.productDetails h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    color: #ff7b00;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.totalSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.paymentMethods {
+    margin-bottom: 2rem;
+}
+
+.paymentMethods h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.paymentOptions {
+    display: grid;
+    gap: 1rem;
+}
+
+.paymentButton {
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.paypalButton {
+    background: #0070ba;
+    color: white;
+}
+
+.paypalButton:hover {
+    background: #005ea6;
+}
+
+.cardButton {
+    background: #ffffff;
+    color: var(--text-primary);
+    border: 2px solid #eee;
+}
+
+.cardButton:hover {
+    background: #f8f8f8;
+    border-color: #ff7b00;
+}
+
+.secureNote {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.secureIcon {
+    color: #4CAF50;
+}
