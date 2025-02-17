@@ -7,27 +7,30 @@ const nextConfig = {
   
   // تكوين الصور
   images: {
+    unoptimized: true,
     domains: ['localhost'],
-    minimumCacheTTL: 60,
   },
 
-  // تكوين الإخراج
-  output: 'standalone',
-  
-  // تعطيل التتبع
-  // tracing: {
-  //   ignoreRootSpans: true
-  // },
-  
-  // تكوين webpack
-  webpack: (config) => {
-    return {
-      ...config,
-      infrastructureLogging: {
-        level: 'error',
-      },
-    };
+  // تعطيل التحسينات
+  experimental: {
+    optimizeCss: false,
+    optimizePackageImports: [],
   },
+  
+  // تكوين webpack الأساسي
+  webpack: (config) => {
+    config.infrastructureLogging = {
+      level: 'none',
+    };
+    // تعطيل التتبع
+    if (config.optimization) {
+      config.optimization.moduleIds = 'named';
+    }
+    return config;
+  },
+
+  // تعطيل التتبع التلقائي
+  generateBuildId: () => 'build',
 };
 
 module.exports = nextConfig;
