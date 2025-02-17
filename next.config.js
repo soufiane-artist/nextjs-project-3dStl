@@ -1,36 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  // تكوين أساسي
-  reactStrictMode: true,
-  swcMinify: true,
   
-  // تكوين الصور
-  images: {
-    unoptimized: true,
-    domains: ['localhost'],
-  },
-
-  // تعطيل التحسينات
-  experimental: {
-    optimizeCss: false,
-    optimizePackageImports: [],
-  },
-  
-  // تكوين webpack الأساسي
-  webpack: (config) => {
-    config.infrastructureLogging = {
-      level: 'none',
-    };
+  // تكوين webpack مع تعطيل التتبع
+  webpack: (config, { isServer }) => {
+    // إضافة canvas كـ external
+    config.externals = [...(config.externals || []), { canvas: 'canvas' }];
+    
     // تعطيل التتبع
-    if (config.optimization) {
-      config.optimization.moduleIds = 'named';
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: false,
+      };
     }
+    
+    // تعطيل source maps
+    config.devtool = false;
+    
     return config;
   },
 
-  // تعطيل التتبع التلقائي
-  generateBuildId: () => 'build',
+  // تعطيل التتبع والتحسينات
+  productionBrowserSourceMaps: false,
+  generateEtags: false,
 };
 
 module.exports = nextConfig;
