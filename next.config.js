@@ -1,32 +1,33 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  webpack: (config) => {
-    return config;
-  },
-  // تحسين الأداء
-  poweredByHeader: false,
+  // تكوين أساسي
   reactStrictMode: true,
-  compress: true,
-  // تحسين البناء
   swcMinify: true,
-  // تحسين التحميل
-  optimizeFonts: true,
-  // تحسين الصور
+  
+  // تكوين الصور
   images: {
     domains: ['localhost'],
     minimumCacheTTL: 60,
   },
-  // تعطيل تتبع الأداء
-  generateBuildId: () => 'build',
-  experimental: {
-    // نستخدم فقط الخيارات المدعومة
-    disableOptimizedLoading: true,
-    cpus: 1
+
+  // تكوين الإخراج
+  output: 'standalone',
+  
+  // تعطيل التتبع
+  // tracing: {
+  //   ignoreRootSpans: true
+  // },
+  
+  // تكوين webpack
+  webpack: (config) => {
+    return {
+      ...config,
+      infrastructureLogging: {
+        level: 'error',
+      },
+    };
   },
-  // إضافة إعدادات التتبع
-  distDir: 'build',
-  output: 'standalone'
 };
 
 module.exports = nextConfig;
