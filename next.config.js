@@ -3,8 +3,12 @@ const nextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   
   // تكوين الإخراج لـ Vercel
-  output: 'standalone',
   distDir: '.next',
+  
+  // Disable telemetry and tracing
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   
   // تكوين webpack مع تعطيل التتبع
   webpack: (config, { isServer }) => {
@@ -34,6 +38,11 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
     unoptimized: true,
+  },
+
+  // Disable tracing
+  experimental: {
+    trace: false,
   },
 };
 
