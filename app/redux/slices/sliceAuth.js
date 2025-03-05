@@ -4,11 +4,10 @@ import {createSlice } from '@reduxjs/toolkit'
 const authSlice = createSlice ({
     name : "auth",
     //ياخد بيانات التسجيل من اللوكال سطرويتج ولو عملنا ريفريش
-    initialState : {
-        user:localStorage.getItem('user')?
-        JSON.parse(localStorage.getItem('user'))
-        : null
-        ,
+    initialState: {
+        user: typeof window !== 'undefined' && localStorage.getItem('user')
+            ? JSON.parse(localStorage.getItem('user'))
+            : null,
     },
     reducers:{
         login(state,action){
