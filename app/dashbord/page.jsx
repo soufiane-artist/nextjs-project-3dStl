@@ -13,7 +13,8 @@ export default function Dashboard() {
         title: '',
         price: '',
         description: '',
-        tags: []
+        tags: [],
+        category: '',
     });
     const [isLoading, setIsLoading] = useState(false);
 
@@ -76,6 +77,7 @@ export default function Dashboard() {
         formData.append('price', productDetails.price);
         formData.append('description', productDetails.description);
         formData.append('tags', productDetails.tags);
+        formData.append('category', productDetails.category);
         
         // Append images
         productImages.forEach((image, index) => {
@@ -83,7 +85,7 @@ export default function Dashboard() {
         });
     
         try {
-            const response = await axios.post('http://localhost:2002/upload', formData, {
+            const response = await axios.post('http://localhost:2002/api/models/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -94,10 +96,12 @@ export default function Dashboard() {
                 title: '',
                 price: '',
                 description: '',
-                tags: []
+                tags: [],
+                category: '',
             });
             setProductImages([]);
             setImagePreviewUrls([]);
+            
         } catch (error) {
             toast.error(error.response?.data?.message || 'Upload failed. Please try again.');
         } finally {
@@ -182,6 +186,18 @@ export default function Dashboard() {
                                 tags: e.target.value.split(',').map(tag => tag.trim())
                             })}
                             placeholder="Enter tags, separated by commas"
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label>category (comma-separated)</label>
+                        <input 
+                            type="text"
+                            onChange={(e) => setProductDetails({
+                                ...productDetails, 
+                                category: e.target.value.split(',').map(tag => tag.trim())
+                            })}
+                            placeholder="Enter category, separated by commas"
                         />
                     </div>
 

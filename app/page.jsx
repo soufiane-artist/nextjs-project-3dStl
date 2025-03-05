@@ -2,13 +2,29 @@
 import styles from './styles/Home.module.css';
 import { models } from './data/models';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
+  const [models,setModels]= useState([])
 
-  const handleDownload = () => {
-    router.push('/pages/download');
+  const handleDownload = (id) => {
+    router.push(`/pages/${id}`);
   };
+
+ useEffect(()=>{
+  const getAllModels = async() => {
+     await axios.get('http://localhost:2002/api/models')
+    .then((res)=>{
+      setModels(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
+  getAllModels()
+  
+ },[])
 
   return (
     <div className={styles.container}>
@@ -99,20 +115,20 @@ export default function Home() {
 
         <div className={styles.grid}>
           {models.map((model) => (
-            <div key={model.id} className={styles.card}>
+            <div key={model._id} className={styles.card}>
               <div className={styles.cardBadge}>Premium</div>
               <img
-                src={model.image}
+                src={model.images[0]}
                 alt={model.title}
                 className={styles.cardImage}
               />
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{model.title}</h3>
                 <div className={styles.cardMeta}>
-                  <p className={styles.cardPrice}>${model.price}</p>
+                  <p className={styles.cardPrice}>${model.price.toFixed(2)}</p>
                   <span className={styles.cardDownloads}>Free on Telegram</span>
                 </div>
-                <button  className={styles.downloadButton} onClick={handleDownload}>
+                <button  className={styles.downloadButton} onClick={() => handleDownload(model._id)}>
                   Pay now
                 </button>
               </div>

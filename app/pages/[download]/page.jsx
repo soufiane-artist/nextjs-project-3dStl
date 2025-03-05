@@ -1,22 +1,20 @@
 'use client';
 import styles from '@/app/styles/Download.module.css';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RelatedModels from '@/app/components/RelatedModels';
 import AboutCults from '@/app/components/AboutCults';
-import { useRouter } from 'next/navigation';
+import { useRouter,useParams } from 'next/navigation';
+
+import axios from 'axios';
 
 export default function Download() {
     const router = useRouter();
     const [currentImage, setCurrentImage] = useState(0);
-    const images = [
-        'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
-        'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
-        'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
-        'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
-        'https://file.pixup3d.com/uploads/post_img/file/67693/x3_(750-750)_ET-Huang-%E6%8A%B1%E8%85%BF%E7%95%B0%E5%BD%A2%20(1).gif',
-    ];
-    
+    const [model, setModel] = useState();
+
+    const { download } = useParams();
+
     const productDetails = {
         title: 'T-60 POWER ARMOR HELMET',
         price: '4.99 $',
@@ -30,22 +28,38 @@ export default function Download() {
         tags: ['FALLOUT POWER ARMOR', 'FALLOUT', 'FALLOUT COSPLAY', 'POWER ARMOR HELMET']
     };
 
+
+
+    useEffect(()=>{
+        const getModel = async()=>{
+            await axios.get(`http://localhost:2002/api/models/${download}`) // Ensure `id` is being used correctly
+            .then((res)=>{
+                setModel(res.data)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+        getModel()
+    }, [download]); // Add `id` to the dependency array
+    
+
+
     const handleDownload = () => {
         console.log('Redirecting to checkout...');
-        router.push('/pages/checkout');
+        router.push('/pages/checkout/' + download);
     };
 
     const handleImageClick = (index) => {
         setCurrentImage(index);
     };
-
+    
     return (
         <>
             <div className={styles.productContainer}>
                 <div className={styles.productGallery}>
                     <div className={styles.mainImage}>
                         <img
-                            src={images[currentImage]}
+                            src={ model?.images[currentImage]}
                             alt={productDetails.title}
                             style={{ 
                                 width: '100%',
@@ -56,7 +70,7 @@ export default function Download() {
                         />
                     </div>
                     <div className={styles.thumbnails}>
-                        {images.map((img, index) => (
+                        {model?.images?.map((img, index) => (
                             <div 
                                 key={index} 
                                 className={`${styles.thumbnail} ${currentImage === index ? styles.active : ''}`}
@@ -73,26 +87,26 @@ export default function Download() {
                 </div>
 
                 <div className={styles.productInfo}>
-                    <h1>{productDetails.title}</h1>
+                    <h1>{model?.title}</h1>
                     
                     <div className={styles.stats}>
                         <div className={styles.stat}>
                             <i className="fas fa-heart"></i>
-                            <span>{productDetails.likes} Likes</span>
+                            <span>{model?.likes} Likes</span>
                         </div>
                         <div className={styles.stat}>
                             <i className="fas fa-share"></i>
-                            <span>{productDetails.shares} Shares</span>
+                            <span>{model?.shares} Shares</span>
                         </div>
                         <div className={styles.stat}>
                             <i className="fas fa-download"></i>
-                            <span>{productDetails.downloads} Downloads</span>
+                            <span>{model?.downloads} Downloads</span>
                         </div>
                     </div>
                     <div className={styles.downloadSection}>
                         <button className={styles.downloadButton} onClick={handleDownload}>
-                            DOWNLOAD
-                            <span className={styles.price}>{productDetails.price}</span>
+                            PAY NOW
+                            <span className={styles.price}>{model?.price.toFixed(2)} $</span>
                         </button>
                     </div>
           
